@@ -12,7 +12,7 @@ namespace BasicCalculator
 {
     public partial class Form1 : Form
     {
-        //Variables para realizar las operaciones 
+        //Variables para realizar las operaciones matematicas
         double resultado = 0;
         double num2 = 0;
         string operacion="";
