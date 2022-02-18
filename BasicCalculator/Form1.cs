@@ -66,18 +66,62 @@ namespace BasicCalculator
         private void btnmas_Click(object sender, EventArgs e)
         {//Con el objeto button atrapo el boton seleccionado ya que cada uno en la accion de clic tienen el mismo metodo
                Button button = (Button)sender;
+
             //Si txtres no es igual a cadena vacia procede a ejecutar lo que hay en su interior
             if (!txtres.Text.Equals(""))
             {
+                
                 // Esta linea de codigo me permite ejecutar el metodo asociado a btnigual con el metodo PerformClick()
-                btnigual.PerformClick();
-                //La variable operacion pasa a ser igual al texto que contenga el boton que se haya seleccionado
-                operacion = button.Text;
+                //btnigual.PerformClick();
+                //Si el txtres no contiene nada no se realizan operaciones 
+                if (txtres.Text.Equals(""))
+                {
+
+                }
+                else if (txtshow.Text.Contains("="))
+                {
+
+                }
+                //de lo contrario num2 pasa a tomar el valor que hay en txtres
+                else
+                {
+                    num2 = Double.Parse(txtres.Text);
+                }
+                //con esta condicion se verifica a que es igual la operacion y se ejecuta el caso correspondiente a su valor
+                switch (operacion)
+                {
+                    case "+":
+                        txtres.Text = Convert.ToString(resultado + num2);
+                        break;
+
+                    case "-":
+                        txtres.Text = Convert.ToString(resultado - num2);
+                        break;
+
+                    case "×":
+                        txtres.Text = Convert.ToString(resultado * num2);
+                        break;
+                    case "÷":
+                        if (num2 == 0)
+                        {
+                            txtres.Text = "Error de Sintaxis";
+                        }
+                        else
+                        {
+                            txtres.Text = Convert.ToString(resultado / num2);
+                        }
+
+                        break;
+
+                }
                 //resultado pasa a ser igual a lo que hay en txtres
                 resultado = Double.Parse(txtres.Text);
+                txtshow.Text = txtres.Text;
+                //La variable operacion pasa a ser igual al texto que contenga el boton que se haya seleccionado
+                operacion = button.Text;
                 //Pasa a ser true
                 hayOperacion = true;
-                txtshow.Text = txtshow.Text + " " + button.Text;
+                txtshow.Text = txtshow.Text + " " + button.Text + " ";
             }
         
            
@@ -87,6 +131,10 @@ namespace BasicCalculator
         {
             //Si el txtres no contiene nada no se realizan operaciones 
             if (txtres.Text.Equals(""))
+            {
+
+            }
+            else if (txtshow.Text.Contains("="))
             {
 
             }
@@ -122,7 +170,8 @@ namespace BasicCalculator
                     break;
 
             }
-            txtshow.Text = txtres.Text;
+            
+            txtshow.Text = Convert.ToString(resultado + " " + operacion + " " + num2 + "=" );
         }
         //Acciones para resetear la calculadora 
         private void btnreset_Click(object sender, EventArgs e)
